@@ -1,0 +1,20 @@
+{
+  "name": "code-reviewer-demo",
+  "version": "1.0.0",
+  "description": "test repo for code reviewer",
+  "homepage": "https://github.com/IamAKS26/code-reviewer-demo#readme",
+  "bugs": {
+    "url": "https://github.com/IamAKS26/code-reviewer-demo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IamAKS26/code-reviewer-demo.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
