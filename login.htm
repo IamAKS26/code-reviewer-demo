@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    padding: 16px;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: #fff;
+    padding: 32px 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 6px; color: #111827; }
+  .sub { color: #6b7280; font-size: .9rem; margin-bottom: 24px; }
+  label { display: block; font-size: .85rem; font-weight: 600; color: #374151; margin-bottom: 6px; }
+  input[type="email"], input[type="password"], input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.15); }
+  .pw-wrap { position: relative; }
+  .pw-wrap button {
+    position: absolute; right: 8px; top: 7px;
+    background: none; border: none; color: #4f46e5;
+    font-size: .8rem; cursor: pointer; padding: 4px 6px;
+  }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: .85rem; }
+  .row label { display: flex; align-items: center; gap: 6px; margin: 0; font-weight: 400; }
+  a { color: #4f46e5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .submit {
+    width: 100%;
+    padding: 11px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .submit:hover { background: #4338ca; }
+  .msg { margin-top: 14px; font-size: .85rem; text-align: center; min-height: 1.2em; color: #dc2626; }
+  .foot { margin-top: 18px; text-align: center; font-size: .85rem; color: #6b7280; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <h1>Welcome back</h1>
+    <p class="sub">Please log in to your account</p>
+
+    <form id="loginForm" novalidate>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="username" required>
+
+      <label for="password">Password</label>
+      <div class="pw-wrap">
+        <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+        <button type="button" id="toggle">Show</button>
+      </div>
+
+      <div class="row">
+        <label><input type="checkbox" id="remember"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="submit">Log in</button>
+      <p class="msg" id="msg"></p>
+    </form>
+
+    <p class="foot">Don't have an account? <a href="#">Sign up</a></p>
+  </main>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const pw = document.getElementById('password');
+  const msg = document.getElementById('msg');
+
+  document.getElementById('toggle').addEventListener('click', e => {
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    e.target.textContent = show ? 'Hide' : 'Show';
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    msg.style.color = '#dc2626';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter a valid email address.'; return; }
+    if (pw.value.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; return; }
+    msg.style.color = '#16a34a';
+    msg.textContent = 'Validated. Connect this form to your backend to log in.';
+    // TODO: send email + password to your server here (e.g. fetch('/api/login', {...}))
+  });
+</script>
+</body>
+</html>
